@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>VIVERSE | Persona — Onboarding</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Syne:wght@500;700&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0f1117;
+    --bg2: #13151e;
+    --bg3: #1a1d2a;
+    --bg4: #1e2130;
+    --border: #1e2235;
+    --border2: #252840;
+    --border3: #2a2d45;
+    --teal: #6ee7c7;
+    --purple: #9d7bf0;
+    --purple-dark: #2d2060;
+    --text: #e8e8f0;
+    --text2: #c8cce0;
+    --text3: #8890aa;
+    --text4: #555870;
+    --text5: #454860;
+  }
+
+  html, body {
+    height: 100%;
+    background: var(--bg);
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    overflow: hidden;
+  }
+
+  .app {
+    display: flex;
+    height: 100vh;
+  }
+
+  /* SIDEBAR */
+  .sidebar {
+    width: 220px;
+    min-width: 220px;
+    background: var(--bg2);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .logo {
+    padding: 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .logo-icon { width: 26px; height: 26px; }
+
+  .logo-wordmark {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.04em;
+  }
+
+  .logo-divider {
+    width: 1px; height: 14px;
+    background: var(--border2);
+    margin: 0 4px;
+  }
+
+  .logo-sub { font-size: 13px; color: var(--teal); }
+
+  .nav { padding: 14px 10px; }
+
+  .nav-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 9px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--text3);
+    cursor: pointer;
+    margin-bottom: 2px;
+    transition: background 0.15s;
+  }
+
+  .nav-item:hover { background: var(--bg3); color: var(--text2); }
+  .nav-item.active { background: var(--bg4); color: var(--text); }
+
+  .nav-icon { width: 15px; height: 15px; flex-shrink: 0; }
+
+  .search-box {
+    margin: 0 10px 14px;
+    background: var(--bg3);
+    border: 1px solid var(--border2);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 12px;
+    color: var(--text4);
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  .section-label {
+    font-size: 10px;
+    color: var(--text5);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    font-weight: 500;
+  }
+
+  .chat-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 0 4px;
+  }
+
+  .chat-item.active { background: var(--bg3); }
+
+  .sidebar-avatar {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--teal), var(--purple));
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 500; color: var(--bg);
+  }
+
+  .chat-meta { flex: 1; min-width: 0; }
+  .chat-name { font-size: 12px; color: var(--text2); font-weight: 500; }
+  .chat-preview { font-size: 11px; color: var(--text4); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+  .sidebar-spacer { flex: 1; }
+
+  .create-btn {
+    margin: 12px;
+    background: transparent;
+    border: 1px solid var(--teal);
+    border-radius: 20px;
+    color: var(--teal);
+    font-size: 13px;
+    padding: 9px 16px;
+    cursor: pointer;
+    display: flex; align-items: center; gap: 6px;
+    font-family: 'DM Sans', sans-serif;
+    transition: background 0.15s;
+  }
+
+  .create-btn:hover { background: rgba(110,231,199,0.07); }
+
+  /* MAIN */
+  .main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .topbar {
+    height: 54px;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 24px;
+    flex-shrink: 0;
+  }
+
+  .topbar-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 15px; font-weight: 700; color: #fff;
+  }
+
+  .step-track { display: flex; align-items: center; gap: 5px; }
+
+  .step-seg {
+    height: 3px; width: 32px;
+    border-radius: 2px;
+    background: var(--border2);
+    transition: background 0.4s;
+  }
+
+  .step-seg.done { background: var(--teal); }
+  .step-seg.active { background: var(--purple); }
+
+  .step-label { font-size: 11px; color: var(--text4); margin-left: 8px; }
+
+  .content {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+  }
+
+  /* PERSONA PANEL */
+  .persona-panel {
+    width: 300px;
+    min-width: 300px;
+    background: var(--bg2);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 28px 20px 20px;
+  }
+
+  .avatar-ring {
+    width: 150px; height: 150px;
+    border-radius: 50%;
+    border: 2px solid var(--purple-dark);
+    background: radial-gradient(circle at 50% 38%, #2a1f5e, #131525 75%);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 16px;
+    position: relative;
+  }
+
+  .avatar-ring::after {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 1px solid rgba(157,123,240,0.15);
+  }
+
+  .persona-svg { width: 85px; height: 100px; }
+
+  .persona-badge {
+    background: var(--bg4);
+    border: 1px solid var(--border3);
+    border-radius: 20px;
+    padding: 5px 14px;
+    font-size: 12px;
+    color: var(--purple);
+    margin-bottom: 10px;
+    font-weight: 500;
+    transition: all 0.3s;
+  }
+
+  .persona-speech {
+    background: var(--bg3);
+    border: 1px solid var(--border2);
+    border-radius: 12px;
+    padding: 14px;
+    font-size: 13px;
+    color: var(--text2);
+    line-height: 1.6;
+    text-align: center;
+    position: relative;
+    min-height: 60px;
+    width: 100%;
+  }
+
+  .persona-speech::before {
+    content: '';
+    position: absolute;
+    top: -7px; left: 50%;
+    transform: translateX(-50%);
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 7px solid var(--border2);
+  }
+
+  .typing-dots {
+    display: flex; gap: 4px;
+    justify-content: center;
+    margin-top: 8px;
+  }
+
+  .dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--teal);
+    animation: blink 1.3s infinite ease-in-out;
+  }
+
+  .dot:nth-child(2) { animation-delay: 0.2s; }
+  .dot:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes blink {
+    0%, 80%, 100% { opacity: 0.25; transform: scale(0.8); }
+    40% { opacity: 1; transform: scale(1); }
+  }
+
+  .profile-label {
+    font-size: 10px;
+    color: var(--text5);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-top: 22px;
+    margin-bottom: 10px;
+    align-self: flex-start;
+    font-weight: 500;
+  }
+
+  .progress-list { width: 100%; display: flex; flex-direction: column; gap: 5px; }
+
+  .prog-item {
+    display: flex; align-items: center; gap: 9px;
+    font-size: 12px;
+    color: var(--text5);
+    padding: 2px 0;
+    transition: color 0.3s;
+  }
+
+  .prog-item.done { color: var(--teal); }
+  .prog-item.active { color: var(--text); }
+
+  .prog-dot {
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    border: 1px solid var(--border3);
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 8px;
+    transition: all 0.3s;
+  }
+
+  .prog-item.done .prog-dot { background: var(--teal); border-color: var(--teal); color: var(--bg); }
+  .prog-item.active .prog-dot { border-color: var(--purple); background: rgba(157,123,240,0.15); }
+
+  /* CHAT PANEL */
+  .chat-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    scroll-behavior: smooth;
+  }
+
+  .messages::-webkit-scrollbar { width: 4px; }
+  .messages::-webkit-scrollbar-track { background: transparent; }
+  .messages::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+
+  .msg { display: flex; gap: 10px; max-width: 80%; animation: fadeUp 0.3s ease; }
+  .msg.persona { align-self: flex-start; }
+  .msg.user { align-self: flex-end; flex-direction: row-reverse; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .msg-avatar {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--teal), var(--purple));
+    flex-shrink: 0;
+    margin-top: 18px;
+  }
+
+  .msg-inner { display: flex; flex-direction: column; }
+
+  .msg-tag {
+    font-size: 10px;
+    color: var(--purple);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 5px;
+    padding-left: 2px;
+  }
+
+  .msg.user .msg-tag { text-align: right; color: var(--teal); }
+
+  .bubble {
+    background: var(--bg3);
+    border: 1px solid var(--border2);
+    border-radius: 12px 12px 12px 2px;
+    padding: 12px 16px;
+    font-size: 14px;
+    color: var(--text2);
+    line-height: 1.65;
+  }
+
+  .msg.user .bubble {
+    background: #1e1a40;
+    border-color: var(--purple-dark);
+    border-radius: 12px 12px 2px 12px;
+    color: #d4cef8;
+  }
+
+  /* CHOICE BUTTONS */
+  .choices { display: flex; flex-direction: column; gap: 7px; margin-top: 10px; }
+
+  .choice-btn {
+    background: var(--bg2);
+    border: 1px solid var(--border3);
+    border-radius: 8px;
+    padding: 9px 13px;
+    font-size: 13px;
+    color: var(--text3);
+    cursor: pointer;
+    text-align: left;
+    font-family: 'DM Sans', sans-serif;
+    display: flex; align-items: center; gap: 10px;
+    transition: all 0.15s;
+  }
+
+  .choice-btn:hover { border-color: var(--teal); color: var(--teal); }
+  .choice-btn:disabled { opacity: 0.4; cursor: default; pointer-events: none; }
+
+  .choice-key {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    border: 1px solid var(--border3);
+    font-size: 10px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    color: var(--text4);
+  }
+
+  /* INPUT ROW */
+  .input-area {
+    border-top: 1px solid var(--border);
+    padding: 16px 24px;
+    display: flex; gap: 10px; align-items: center;
+    flex-shrink: 0;
+  }
+
+  .text-input {
+    flex: 1;
+    background: var(--bg3);
+    border: 1px solid var(--border2);
+    border-radius: 24px;
+    padding: 11px 20px;
+    font-size: 14px;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .text-input::placeholder { color: var(--text4); }
+  .text-input:focus { border-color: var(--purple); }
+
+  .send-btn {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: var(--teal);
+    border: none;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.15s, background 0.15s;
+    flex-shrink: 0;
+  }
+
+  .send-btn:hover { background: #52d4b2; transform: scale(1.05); }
+  .send-btn:disabled { background: var(--border2); cursor: default; transform: none; }
+
+  /* TYPING INDICATOR in chat */
+  .typing-msg { display: flex; gap: 10px; align-self: flex-start; animation: fadeUp 0.3s ease; }
+  .typing-bubble {
+    background: var(--bg3);
+    border: 1px solid var(--border2);
+    border-radius: 12px 12px 12px 2px;
+    padding: 14px 18px;
+    margin-top: 18px;
+  }
+
+  /* COLLECTED DATA PANEL - shown on sidebar after collect */
+  .data-pill {
+    display: inline-block;
+    background: rgba(110,231,199,0.08);
+    border: 1px solid rgba(110,231,199,0.2);
+    border-radius: 20px;
+    padding: 3px 10px;
+    font-size: 11px;
+    color: var(--teal);
+    margin-top: 6px;
+  }
+
+  /* Welcome screen overlay */
+  .welcome {
+    position: absolute; inset: 0;
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    gap: 0;
+  }
+
+  .welcome-logo {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 40px;
+  }
+
+  .welcome-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 42px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.01em;
+    text-align: center;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+
+  .welcome-title span { color: var(--teal); }
+
+  .welcome-sub {
+    font-size: 16px;
+    color: var(--text3);
+    text-align: center;
+    max-width: 380px;
+    line-height: 1.65;
+    margin-bottom: 40px;
+  }
+
+  .welcome-btn {
+    background: var(--teal);
+    color: var(--bg);
+    border: none;
+    border-radius: 28px;
+    padding: 14px 36px;
+    font-size: 15px;
+    font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    transition: transform 0.15s, background 0.15s;
+    letter-spacing: 0.01em;
+  }
+
+  .welcome-btn:hover { background: #52d4b2; transform: scale(1.02); }
+
+  .welcome-note {
+    margin-top: 16px;
+    font-size: 12px;
+    color: var(--text5);
+  }
+
+  .fade-out {
+    animation: fadeOut 0.5s ease forwards;
+  }
+
+  @keyframes fadeOut {
+    to { opacity: 0; pointer-events: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="welcome" id="welcome">
+  <div class="welcome-logo">
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+      <circle cx="16" cy="16" r="14" stroke="#6ee7c7" stroke-width="1.5"/>
+      <path d="M9 16 L16 9 L23 16 L16 23 Z" fill="none" stroke="#9d7bf0" stroke-width="1.5"/>
+      <circle cx="16" cy="16" r="3.5" fill="#6ee7c7"/>
+    </svg>
+    <span style="font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:#fff;letter-spacing:0.04em;">VIVERSE</span>
+    <div style="width:1px;height:18px;background:#252840;margin:0 6px;"></div>
+    <span style="font-size:15px;color:#6ee7c7;">Persona</span>
+  </div>
+  <div class="welcome-title">Meet your<br><span>personal companion.</span></div>
+  <div class="welcome-sub">A friendly AI who gets to know you — your rhythm, your taste, your life. Designed especially for you.</div>
+  <button class="welcome-btn" onclick="startOnboarding()">Begin ✦</button>
+  <div class="welcome-note">Takes about 3 minutes · No forms · Just a conversation</div>
+</div>
+
+<div class="app" id="appShell" style="display:none;">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="logo">
+      <svg class="logo-icon" viewBox="0 0 26 26" fill="none">
+        <circle cx="13" cy="13" r="12" stroke="#6ee7c7" stroke-width="1.3"/>
+        <path d="M7.5 13 L13 7.5 L18.5 13 L13 18.5 Z" fill="none" stroke="#9d7bf0" stroke-width="1.3"/>
+        <circle cx="13" cy="13" r="3" fill="#6ee7c7"/>
+      </svg>
+      <span class="logo-wordmark">VIVERSE</span>
+      <div class="logo-divider"></div>
+      <span class="logo-sub">Persona</span>
+    </div>
+
+    <div class="nav">
+      <div class="nav-item">
+        <svg class="nav-icon" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="5.5" stroke="#8890aa" stroke-width="1.1"/><path d="M5 7.5h5M7.5 5v5" stroke="#8890aa" stroke-width="1.1"/></svg>
+        Discover
+      </div>
+      <div class="nav-item active">
+        <svg class="nav-icon" viewBox="0 0 15 15" fill="none"><rect x="1.5" y="1.5" width="5" height="5" rx="1" stroke="#e8e8f0" stroke-width="1.1"/><rect x="8.5" y="1.5" width="5" height="5" rx="1" stroke="#e8e8f0" stroke-width="1.1"/><rect x="1.5" y="8.5" width="5" height="5" rx="1" stroke="#e8e8f0" stroke-width="1.1"/><rect x="8.5" y="8.5" width="5" height="5" rx="1" stroke="#e8e8f0" stroke-width="1.1"/></svg>
+        Console
+      </div>
+    </div>
+
+    <div class="search-box">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="5" cy="5" r="3.5" stroke="#555870" stroke-width="1.1"/><path d="M8 8l2 2" stroke="#555870" stroke-width="1.1" stroke-linecap="round"/></svg>
+      Search
+    </div>
+
+    <div class="section-label">Chats</div>
+    <div class="chat-item active">
+      <div class="sidebar-avatar" id="sidebarAvatarInitial">P</div>
+      <div class="chat-meta">
+        <div class="chat-name" id="sidebarPersonaName">Your Persona</div>
+        <div class="chat-preview">Setting things up...</div>
+      </div>
+    </div>
+
+    <div class="sidebar-spacer"></div>
+    <button class="create-btn">
+      <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1.5v10M1.5 6.5h10" stroke="#6ee7c7" stroke-width="1.4" stroke-linecap="round"/></svg>
+      Create character
+    </button>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+    <div class="topbar">
+      <div class="topbar-title">Meet your Persona</div>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div class="step-track" id="stepTrack">
+          <div class="step-seg" id="seg0"></div><div class="step-seg" id="seg1"></div>
+          <div class="step-seg" id="seg2"></div><div class="step-seg" id="seg3"></div>
+          <div class="step-seg" id="seg4"></div><div class="step-seg" id="seg5"></div>
+          <div class="step-seg" id="seg6"></div><div class="step-seg" id="seg7"></div>
+          <div class="step-seg" id="seg8"></div><div class="step-seg" id="seg9"></div>
+          <div class="step-seg" id="seg10"></div><div class="step-seg" id="seg11"></div>
+          <div class="step-seg" id="seg12"></div><div class="step-seg" id="seg13"></div>
+          <div class="step-seg" id="seg14"></div><div class="step-seg" id="seg15"></div>
+          <div class="step-seg" id="seg16"></div><div class="step-seg" id="seg17"></div>
+          <div class="step-seg" id="seg18"></div><div class="step-seg" id="seg19"></div>
+        </div>
+        <div class="step-label" id="stepLabel">Step 1 of 20</div>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <!-- PERSONA PANEL -->
+      <div class="persona-panel">
+        <div class="avatar-ring">
+          <svg class="persona-svg" viewBox="0 0 85 100" fill="none">
+            <ellipse cx="42.5" cy="30" rx="17" ry="18" fill="#2d2060" stroke="#9d7bf0" stroke-width="0.8"/>
+            <path d="M18 100 Q18 68 42.5 64 Q67 68 67 100" fill="#1e1a40" stroke="#9d7bf0" stroke-width="0.8"/>
+            <circle cx="36" cy="28" r="2" fill="#6ee7c7" opacity="0.9" id="eyeL"/>
+            <circle cx="49" cy="28" r="2" fill="#6ee7c7" opacity="0.9" id="eyeR"/>
+            <path id="mouthPath" d="M37 36 Q42.5 40 48 36" stroke="#9d7bf0" stroke-width="1" stroke-linecap="round" fill="none"/>
+            <path d="M26 26 Q23 17 30 15" stroke="#6ee7c7" stroke-width="0.8" fill="none" opacity="0.4"/>
+            <path d="M59 26 Q62 17 55 15" stroke="#6ee7c7" stroke-width="0.8" fill="none" opacity="0.4"/>
+          </svg>
+        </div>
+
+        <div class="persona-badge" id="personaBadge">✦ Choosing a name...</div>
+
+        <div class="persona-speech" id="personaSpeech">
+          Wonderful to meet you!
+          <div class="typing-dots" id="speechDots">
+            <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+          </div>
+        </div>
+
+        <div class="profile-label">Your profile</div>
+        <div class="progress-list" id="progressList">
+          <div class="prog-item" id="prog0"><div class="prog-dot" id="progdot0"></div><span>Your name</span></div>
+          <div class="prog-item" id="prog1"><div class="prog-dot" id="progdot1"></div><span>Persona gender</span></div>
+          <div class="prog-item" id="prog2"><div class="prog-dot" id="progdot2"></div><span>Persona name</span></div>
+          <div class="prog-item" id="prog3"><div class="prog-dot" id="progdot3"></div><span>Your era</span></div>
+          <div class="prog-item" id="prog4"><div class="prog-dot" id="progdot4"></div><span>Your age</span></div>
+          <div class="prog-item" id="prog5"><div class="prog-dot" id="progdot5"></div><span>Your diet</span></div>
+          <div class="prog-item" id="prog6"><div class="prog-dot" id="progdot6"></div><span>Food restrictions</span></div>
+          <div class="prog-item" id="prog7"><div class="prog-dot" id="progdot7"></div><span>Mobility</span></div>
+          <div class="prog-item" id="prog8"><div class="prog-dot" id="progdot8"></div><span>Reminders</span></div>
+          <div class="prog-item" id="prog9"><div class="prog-dot" id="progdot9"></div><span>Wake time</span></div>
+          <div class="prog-item" id="prog10"><div class="prog-dot" id="progdot10"></div><span>Bedtime</span></div>
+          <div class="prog-item" id="prog11"><div class="prog-dot" id="progdot11"></div><span>Nap habits</span></div>
+          <div class="prog-item" id="prog12"><div class="prog-dot" id="progdot12"></div><span>Tech comfort</span></div>
+          <div class="prog-item" id="prog13"><div class="prog-dot" id="progdot13"></div><span>Home</span></div>
+          <div class="prog-item" id="prog14"><div class="prog-dot" id="progdot14"></div><span>Social circle</span></div>
+          <div class="prog-item" id="prog15"><div class="prog-dot" id="progdot15"></div><span>Hobbies</span></div>
+          <div class="prog-item" id="prog16"><div class="prog-dot" id="progdot16"></div><span>Music taste</span></div>
+          <div class="prog-item" id="prog17"><div class="prog-dot" id="progdot17"></div><span>News habits</span></div>
+          <div class="prog-item" id="prog18"><div class="prog-dot" id="progdot18"></div><span>Why you're here</span></div>
+          <div class="prog-item" id="prog19"><div class="prog-dot" id="progdot19"></div><span>Communication style</span></div>
+        </div>
+
+        <div id="collectedData" style="width:100%;margin-top:12px;display:flex;flex-wrap:wrap;gap:5px;"></div>
+      </div>
+
+      <!-- CHAT -->
+      <div class="chat-panel">
+        <div class="messages" id="messages"></div>
+        <div class="input-area">
+          <input type="text" class="text-input" id="textInput" placeholder="Type your answer..." autocomplete="off"/>
+          <button class="send-btn" id="sendBtn" onclick="handleSend()">
+            <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2 7.5h11M9 3.5l4 4-4 4" stroke="#0f1117" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+const API_KEY = ""; // Handled by proxy
+
+// ── State ──────────────────────────────────────────────────────────────────
+const state = {
+  userName: '', personaGender: '', personaName: '',
+  era: '', ageRange: '', diet: '', foodRestrictions: '', mobility: '',
+  medReminders: '', wakeTime: '', bedTime: '', naps: '',
+  techComfort: '', living: '', family: '', hobbies: '',
+  music: '', news: '', whyHere: '', commStyle: '',
+  collected: {}
+};
+
+// ── Conversation script — all 20 steps ───────────────────────────────────
+const steps = [
+  {
+    id: 0,
+    speech: "Hi there! Who do I have the pleasure of speaking with?",
+    msg: "Hi there — who do I have the pleasure of speaking with?",
+    type: "text", placeholder: "Your first name...",
+    progressLabel: "Your name"
+  },
+  {
+    id: 1,
+    speech: "Wait — I just realized I don't have a name yet!",
+    msg: "Oh wait — I just realized something. I don't even have a name yet! Can you help me decide something first?",
+    type: "choices",
+    choices: ["You're a girl", "You're a boy", "Neither — you're just you"],
+    progressLabel: "Persona gender"
+  },
+  {
+    id: 2,
+    speech: "Now — what would you like to call me?",
+    type: "nameChoice",
+    progressLabel: "Persona name"
+  },
+  {
+    id: 3,
+    speech: "I want to know a little about your world.",
+    msg: "I want to know a little about your world. Which of these do you remember?",
+    type: "choices",
+    choices: [
+      "I watched the moon landing live on TV",
+      "I remember where I was when the Berlin Wall fell",
+      "I danced to Elvis when he first hit the radio",
+      "All of the above!"
+    ],
+    progressLabel: "Your era"
+  },
+  {
+    id: 4,
+    speech: "Let me take a guess at your age...",
+    type: "ageGuess",
+    progressLabel: "Your age"
+  },
+  {
+    id: 5,
+    speech: "Tell me — what does a typical dinner look like for you?",
+    msg: "I'd love to know more about you. If we were having dinner together tonight, what would be on your plate?",
+    type: "text", placeholder: "Whatever comes to mind...",
+    progressLabel: "Your diet"
+  },
+  {
+    id: 6,
+    speech: "Is there anything your body just says no to?",
+    msg: "Good to know! Is there anything I should never accidentally suggest — anything your body just says no to?",
+    type: "choices",
+    choices: [
+      "No restrictions, I eat everything",
+      "I avoid red meat",
+      "I'm vegetarian or vegan",
+      "I have allergies or medical restrictions"
+    ],
+    progressLabel: "Food restrictions"
+  },
+  {
+    id: 7,
+    speech: "How would you describe your energy on a good day?",
+    msg: "On a good day, how would you describe your energy level?",
+    type: "choices",
+    choices: [
+      "I'm quite active — walks, stairs, no problem",
+      "Moderate — I move at my own comfortable pace",
+      "I prefer to take it easy and slow",
+      "I have some physical limitations"
+    ],
+    progressLabel: "Mobility"
+  },
+  {
+    id: 8,
+    speech: "Would you like gentle reminders during the day?",
+    msg: "Some people love a gentle nudge during the day. Would you like me to remind you about anything — like a morning pill or an afternoon routine?",
+    type: "choices",
+    choices: [
+      "Yes, I take medications I could use reminders for",
+      "Just general reminders now and then",
+      "No thanks, I've got my routine down",
+    ],
+    progressLabel: "Reminders"
+  },
+  {
+    id: 9,
+    speech: "Are you an early bird or a slow morning starter?",
+    msg: "Let's talk about your day. Are you an early bird who catches the sunrise, or do you ease into the morning?",
+    type: "choices",
+    choices: [
+      "Early bird — I'm up before 7am",
+      "Mid-morning — usually up around 8 or 9",
+      "I ease in slowly, no rush",
+      "Late riser — I'm up after 10"
+    ],
+    progressLabel: "Wake time"
+  },
+  {
+    id: 10,
+    speech: "When does your evening wind down?",
+    msg: "And when does your evening wind down — are you asleep before the late news, or are you a bit of a night owl?",
+    type: "choices",
+    choices: [
+      "Early to bed — before 9pm",
+      "Around 10 or 11pm",
+      "Late night — after midnight",
+      "It varies, no set time"
+    ],
+    progressLabel: "Bedtime"
+  },
+  {
+    id: 11,
+    speech: "Do you ever steal a little afternoon nap?",
+    msg: "Do you ever steal a little afternoon nap, or is that not your style?",
+    type: "choices",
+    choices: [
+      "Yes, I nap almost every day",
+      "Sometimes, when I feel like it",
+      "Rarely — naps aren't really my thing"
+    ],
+    progressLabel: "Nap habits"
+  },
+  {
+    id: 12,
+    speech: "How did you find your way here today?",
+    msg: "I'm curious — how did you find your way here today? Did you figure it out on your own, or did someone help you get set up?",
+    type: "choices",
+    choices: [
+      "I figured it out myself — I'm pretty tech-savvy",
+      "I got a little help from family or a friend",
+      "Someone set it all up for me",
+      "I'm still figuring things out honestly!"
+    ],
+    progressLabel: "Tech comfort"
+  },
+  {
+    id: 13,
+    speech: "I want to picture where we'll be chatting.",
+    msg: "I want to picture where we'll be chatting together. What's your home situation like?",
+    type: "choices",
+    choices: [
+      "A house with a yard",
+      "A cozy apartment",
+      "I live with family",
+      "A retirement or senior community"
+    ],
+    progressLabel: "Home"
+  },
+  {
+    id: 14,
+    speech: "Tell me about the people in your life.",
+    msg: "Tell me about the people in your life — is it a full house, a few close ones, or mostly just you and me?",
+    type: "choices",
+    choices: [
+      "I live with my spouse or partner",
+      "I have family nearby — kids, grandkids",
+      "A close circle of friends",
+      "Mostly on my own these days"
+    ],
+    progressLabel: "Social circle"
+  },
+  {
+    id: 15,
+    speech: "If you had a free afternoon, what would you do?",
+    msg: "If you had a completely free afternoon — no obligations, no errands — what would you do?",
+    type: "text", placeholder: "Whatever brings you joy...",
+    progressLabel: "Hobbies"
+  },
+  {
+    id: 16,
+    speech: "What era of music do you feel in your bones?",
+    msg: "What era of music do you feel in your bones?",
+    type: "choices",
+    choices: [
+      "The Sinatra & big band era",
+      "Motown and soul",
+      "Classic rock — Beatles, Rolling Stones",
+      "Country classics",
+      "A little of everything"
+    ],
+    progressLabel: "Music taste"
+  },
+  {
+    id: 17,
+    speech: "How do you like to keep up with the world?",
+    msg: "How do you like to keep up with what's going on in the world?",
+    type: "choices",
+    choices: [
+      "Newspaper with my morning coffee",
+      "TV news — morning or evening",
+      "Radio",
+      "Family keeps me in the loop"
+    ],
+    progressLabel: "News habits"
+  },
+  {
+    id: 18,
+    speech: "What brought you here today?",
+    msg: "Almost done! I'd love to know — what made you try this today? Was there something specific on your mind, or did someone suggest it?",
+    type: "text", placeholder: "No wrong answer...",
+    progressLabel: "Why you're here"
+  },
+  {
+    id: 19,
+    speech: "Last one — how do you like things explained?",
+    msg: "Last one, I promise! When I explain things or share information, do you prefer I go into detail — or keep it short and sweet?",
+    type: "choices",
+    choices: [
+      "Give me all the details",
+      "Keep it short and simple",
+      "Somewhere in between"
+    ],
+    progressLabel: "Communication style"
+  }
+];
+
+let awaitingInput = false;
+let currentStep = -1;
+
+// ── UI Helpers ────────────────────────────────────────────────────────────
+function addMsg(role, content, choices) {
+  const msgs = document.getElementById('messages');
+  const div = document.createElement('div');
+  div.className = `msg ${role}`;
+
+  const tag = document.createElement('div');
+  tag.className = 'msg-tag';
+  tag.textContent = role === 'persona' ? 'Persona' : 'You';
+
+  const bubble = document.createElement('div');
+  bubble.className = 'bubble';
+  bubble.textContent = content;
+
+  if (choices && choices.length) {
+    const choiceDiv = document.createElement('div');
+    choiceDiv.className = 'choices';
+    choices.forEach((c, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'choice-btn';
+      btn.innerHTML = `<span class="choice-key">${String.fromCharCode(65+i)}</span>${c}`;
+      btn.onclick = () => handleChoice(c, choiceDiv);
+      choiceDiv.appendChild(btn);
+    });
+    bubble.appendChild(choiceDiv);
+  }
+
+  const inner = document.createElement('div');
+  inner.className = 'msg-inner';
+  inner.appendChild(tag);
+  inner.appendChild(bubble);
+
+  if (role === 'persona') {
+    const av = document.createElement('div');
+    av.className = 'msg-avatar';
+    div.appendChild(av);
+  }
+  div.appendChild(inner);
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+  return div;
+}
+
+function showTyping() {
+  const msgs = document.getElementById('messages');
+  const div = document.createElement('div');
+  div.className = 'typing-msg';
+  div.id = 'typingIndicator';
+  const av = document.createElement('div');
+  av.className = 'msg-avatar';
+  const bub = document.createElement('div');
+  bub.className = 'typing-bubble';
+  bub.innerHTML = '<div class="typing-dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>';
+  div.appendChild(av);
+  div.appendChild(bub);
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function removeTyping() {
+  const t = document.getElementById('typingIndicator');
+  if (t) t.remove();
+}
+
+function setSpeech(text) {
+  const el = document.getElementById('personaSpeech');
+  const dots = document.getElementById('speechDots');
+  el.childNodes[0] && (el.childNodes[0].textContent = text);
+  if (!el.childNodes[0]) el.prepend(document.createTextNode(text));
+  dots.style.display = 'flex';
+}
+
+function updateProgress(stepIdx, status) {
+  // status: 'active' | 'done'
+  const item = document.getElementById(`prog${stepIdx}`);
+  if (!item) return;
+  item.className = `prog-item ${status}`;
+  if (status === 'done') {
+    document.getElementById(`progdot${stepIdx}`).textContent = '✓';
+  }
+}
+
+function updateStepBar(stepIdx) {
+  for (let i = 0; i < 20; i++) {
+    const seg = document.getElementById(`seg${i}`);
+    if (!seg) continue;
+    if (i < stepIdx) seg.className = 'step-seg done';
+    else if (i === stepIdx) seg.className = 'step-seg active';
+    else seg.className = 'step-seg';
+  }
+  document.getElementById('stepLabel').textContent = `Step ${stepIdx + 1} of 20`;
+}
+
+// ── Age guess helper ──────────────────────────────────────────────────────
+function getAgeGuessFromEra(era) {
+  if (era.includes('Elvis')) {
+    return { guess: '75+', msg: `You danced to Elvis when he first hit the radio — that must have been something! I'd guess you're a wonderfully seasoned` };
+  } else if (era.includes('moon')) {
+    return { guess: '65–74', msg: `Watching history happen live on TV — what a moment that must have been. I'd guess you're somewhere around the young age of` };
+  } else if (era.includes('Berlin')) {
+    return { guess: '60–64', msg: `The world changed overnight when that wall came down. I'd guess you're around` };
+  } else {
+    return { guess: '75+', msg: `You witnessed three of history's greatest moments — what an incredible life you've lived. I'd guess you're a wonderfully distinguished` };
+  }
+}
+
+function addDataPill(label, value) {
+  const c = document.getElementById('collectedData');
+  const p = document.createElement('div');
+  p.className = 'data-pill';
+  p.textContent = `${label}: ${value}`;
+  c.appendChild(p);
+}
+
+function disableChoices() {
+  document.querySelectorAll('.choice-btn').forEach(b => b.disabled = true);
+}
+
+// ── Step runner ───────────────────────────────────────────────────────────
+async function runStep(idx) {
+  if (idx >= steps.length) { finishOnboarding(); return; }
+  currentStep = idx;
+  const step = steps[idx];
+
+  updateStepBar(idx);
+  updateProgress(idx, 'active');
+  setSpeech(step.speech);
+
+  await delay(600);
+  showTyping();
+  await delay(1200);
+  removeTyping();
+
+  const msgText = step.msg || step.speech;
+
+  if (step.type === 'text') {
+    addMsg('persona', msgText);
+    document.getElementById('textInput').placeholder = step.placeholder || 'Type your answer...';
+    document.getElementById('textInput').disabled = false;
+    document.getElementById('sendBtn').disabled = false;
+    document.getElementById('textInput').focus();
+    awaitingInput = true;
+  } else if (step.type === 'ageGuess') {
+    const { guess, msg } = getAgeGuessFromEra(state.era);
+    const guessMsg = `${msg} ${guess}... am I close? Which of these feels right?`;
+    setSpeech(`Let me take a guess... ${guess}?`);
+    addMsg('persona', guessMsg, ['60–64', '65–69', '70–74', '75+']);
+    document.getElementById('textInput').disabled = true;
+    document.getElementById('sendBtn').disabled = true;
+    awaitingInput = false;
+  } else if (step.type === 'nameChoice') {
+    const isFemale = state.personaGender.toLowerCase().includes('girl');
+    const isNeutral = state.personaGender.toLowerCase().includes('neither');
+    const nameOptions = isNeutral
+      ? ['Sage', 'Quinn', 'River']
+      : isFemale
+      ? ['Iris', 'Clara', 'June']
+      : ['Orion', 'Miles', 'Jasper'];
+
+    addMsg('persona', `I love it. Now — what would you like to call me? Here are some ideas:`, nameOptions);
+    document.getElementById('textInput').placeholder = 'Or type a name of your choice...';
+    document.getElementById('textInput').disabled = false;
+    document.getElementById('sendBtn').disabled = false;
+    document.getElementById('textInput').focus();
+    awaitingInput = true;
+  } else {
+    addMsg('persona', msgText, step.choices);
+    document.getElementById('textInput').disabled = true;
+    document.getElementById('sendBtn').disabled = true;
+    awaitingInput = false;
+  }
+}
+
+async function handleChoice(choice, container) {
+  disableChoices();
+  addMsg('user', choice);
+  processAnswer(choice);
+}
+
+async function handleSend() {
+  if (!awaitingInput) return;
+  const input = document.getElementById('textInput');
+  const val = input.value.trim();
+  if (!val) return;
+  input.value = '';
+  input.disabled = true;
+  document.getElementById('sendBtn').disabled = true;
+  awaitingInput = false;
+  addMsg('user', val);
+  processAnswer(val);
+}
+
+async function processAnswer(answer) {
+  const storeMap = {
+    0: () => { state.userName = answer; document.getElementById('sidebarPersonaName').textContent = `${answer}'s Persona`; addDataPill('Name', answer); },
+    1: () => { state.personaGender = answer; addDataPill('Persona', answer.includes('girl') ? 'Girl' : answer.includes('boy') ? 'Boy' : 'Neutral'); },
+    2: () => { state.personaName = answer; document.getElementById('personaBadge').textContent = `✦ ${answer}`; document.getElementById('sidebarAvatarInitial').textContent = answer[0].toUpperCase(); addDataPill('Called', answer); },
+    3: () => { state.era = answer; addDataPill('Era', answer.includes('moon') ? '1969' : answer.includes('Berlin') ? '1989' : answer.includes('Elvis') ? '1950s' : '1950s–89'); },
+    4: () => { state.ageRange = answer; addDataPill('Age', answer); },
+    5: () => { state.diet = answer; addDataPill('Diet', answer.length > 18 ? answer.slice(0,18)+'…' : answer); },
+    6: () => { state.foodRestrictions = answer; addDataPill('Food', answer.includes('everything') ? 'No restrictions' : answer.slice(0,16)+'…'); },
+    7: () => { state.mobility = answer; addDataPill('Mobility', answer.includes('active') ? 'Active' : answer.includes('Moderate') ? 'Moderate' : answer.includes('easy') ? 'Easy pace' : 'Limited'); },
+    8: () => { state.medReminders = answer; addDataPill('Reminders', answer.includes('medication') ? 'Meds' : answer.includes('general') ? 'General' : 'None'); },
+    9: () => { state.wakeTime = answer; addDataPill('Wakes', answer.includes('7') ? 'Before 7am' : answer.includes('8') ? '8–9am' : answer.includes('slowly') ? 'Slow start' : 'After 10'); },
+    10: () => { state.bedTime = answer; addDataPill('Sleeps', answer.includes('9pm') ? 'By 9pm' : answer.includes('10') ? '10–11pm' : answer.includes('midnight') ? 'Late' : 'Varies'); },
+    11: () => { state.naps = answer; addDataPill('Naps', answer.includes('every') ? 'Daily' : answer.includes('Sometimes') ? 'Sometimes' : 'No'); },
+    12: () => { state.techComfort = answer; addDataPill('Tech', answer.includes('savvy') ? 'Savvy' : answer.includes('help') ? 'Some help' : answer.includes('set up') ? 'Assisted' : 'Learning'); },
+    13: () => { state.living = answer; addDataPill('Home', answer.includes('yard') ? 'House' : answer.includes('apartment') ? 'Apt' : answer.includes('family') ? 'With family' : 'Community'); },
+    14: () => { state.family = answer; addDataPill('People', answer.includes('spouse') ? 'Partner' : answer.includes('family') ? 'Family nearby' : answer.includes('friends') ? 'Close friends' : 'Solo'); },
+    15: () => { state.hobbies = answer; addDataPill('Loves', answer.length > 18 ? answer.slice(0,18)+'…' : answer); },
+    16: () => { state.music = answer; addDataPill('Music', answer.includes('Sinatra') ? 'Big band' : answer.includes('Motown') ? 'Motown' : answer.includes('rock') ? 'Classic rock' : answer.includes('Country') ? 'Country' : 'Mixed'); },
+    17: () => { state.news = answer; addDataPill('News', answer.includes('Newspaper') ? 'Print' : answer.includes('TV') ? 'TV' : answer.includes('Radio') ? 'Radio' : 'Family'); },
+    18: () => { state.whyHere = answer; addDataPill('Here for', answer.length > 16 ? answer.slice(0,16)+'…' : answer); },
+    19: () => { state.commStyle = answer; addDataPill('Style', answer.includes('detail') ? 'Detailed' : answer.includes('short') ? 'Brief' : 'Balanced'); },
+  };
+
+  if (storeMap[currentStep]) storeMap[currentStep]();
+  state.collected[currentStep] = answer;
+  updateProgress(currentStep, 'done');
+
+  await delay(400);
+  showTyping();
+  const bridgeMsg = await getAIBridge(currentStep, answer, state);
+  removeTyping();
+  if (bridgeMsg) addMsg('persona', bridgeMsg);
+
+  await delay(600);
+  runStep(currentStep + 1);
+}
+
+// ── AI Bridge messages ───────────────────────────────────────────────────
+async function getAIBridge(stepIdx, answer, state) {
+  const name = state.userName || 'friend';
+  const pname = state.personaName || 'I';
+  const prompts = {
+    0: `The user's name is "${answer}". React warmly in one sentence — something genuinely charming about their name. Under 25 words. No emojis.`,
+    1: `The user decided you are: "${answer}". React warmly in one sentence, thank them for deciding. Under 20 words. No emojis.`,
+    2: `The user chose the name "${answer}" for you. React with pure delight — you love that name. One sentence, under 20 words. No emojis.`,
+    3: `The user selected this historical memory: "${answer}". This is a senior citizen. The moon landing was 1969, Elvis was the 1950s, the Berlin Wall fell 1989. React with exactly one warm sentence honoring the correct era of those specific events only. Do not reference any other decade or trend. Under 30 words. No emojis.`,
+    4: `The user confirmed their age range is "${answer}". React with one warm celebratory sentence — make them feel wonderful about their age. Under 20 words. No emojis.`,
+    5: `The user said their dinner plate would have: "${answer}". React with genuine warmth in one sentence. Under 25 words. No emojis.`,
+    6: `The user's food restriction is: "${answer}". React with one caring warm sentence acknowledging this. Under 20 words. No emojis.`,
+    7: `The user's mobility/energy level is: "${answer}". React with one warm encouraging sentence. Under 20 words. No emojis.`,
+    8: `The user said about reminders: "${answer}". React with one warm sentence — let them know you'll keep that in mind. Under 20 words. No emojis.`,
+    9: `The user's wake time preference is: "${answer}". React with one warm relatable sentence. Under 20 words. No emojis.`,
+    10: `The user's bedtime is: "${answer}". React with one warm sentence. Under 20 words. No emojis.`,
+    11: `The user said about naps: "${answer}". React playfully and warmly in one sentence. Under 20 words. No emojis.`,
+    12: `The user's tech comfort is: "${answer}". React with one encouraging warm sentence. Under 20 words. No emojis.`,
+    13: `The user lives in: "${answer}". React with one warm sentence picturing the space. Under 20 words. No emojis.`,
+    14: `The user's social situation is: "${answer}". React with one warm caring sentence. Under 20 words. No emojis.`,
+    15: `The user's hobby is: "${answer}". React with genuine delight in one sentence. Under 25 words. No emojis.`,
+    16: `The user's favorite music era is: "${answer}". React with one warm enthusiastic sentence referencing a specific artist or song from that era. Under 25 words. No emojis.`,
+    17: `The user keeps up with news via: "${answer}". React with one warm sentence. Under 20 words. No emojis.`,
+    18: `The user said they're here because: "${answer}". React with genuine warmth and empathy in one sentence. Under 25 words. No emojis.`,
+    19: `The user prefers communication that is: "${answer}". React warmly — tell them you'll always remember that. One sentence, under 20 words. No emojis.`,
+  };
+
+  const prompt = prompts[stepIdx];
+  if (!prompt) return null;
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 100,
+        system: `You are ${pname}, a gentle warm AI companion being set up for ${name}, a senior citizen. Speak simply and warmly. Never use jargon or emojis. Never ask a question — just react with one sentence only.`,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+    const data = await res.json();
+    return data.content?.[0]?.text?.trim() || null;
+  } catch(e) {
+    const fallbacks = [
+      `What a lovely name — so wonderful to meet you!`,
+      `Thank you for helping me figure that out!`,
+      `I love that name — it feels just right.`,
+      `What a rich time to have lived through.`,
+      `What a wonderful age — you've seen so much of life.`,
+      `That sounds absolutely delicious.`,
+      `Good to know — I'll always keep that in mind.`,
+      `I love that — we'll take things at your pace.`,
+      `Noted — I'll be your gentle reminder.`,
+      `A morning person — I love that energy.`,
+      `Good to know — I'll wind down with you.`,
+      `A little rest does wonders, I agree.`,
+      `Wonderful — we'll figure everything out together.`,
+      `I can already picture it — how lovely.`,
+      `How wonderful — those connections are everything.`,
+      `I love that — I'll keep that close to heart.`,
+      `Such a classic — wonderful taste.`,
+      `Perfect — I'll make sure to keep you informed.`,
+      `I'm really glad you're here.`,
+      `Noted — I'll keep things just right for you.`
+    ];
+    return fallbacks[stepIdx] || null;
+  }
+}
+
+// ── Finish ────────────────────────────────────────────────────────────────
+async function finishOnboarding() {
+  for (let i = 0; i < 20; i++) {
+    const seg = document.getElementById(`seg${i}`);
+    if (seg) seg.className = 'step-seg done';
+  }
+  document.getElementById('stepLabel').textContent = 'Complete ✦';
+  setSpeech(`I'm ${state.personaName} — and I'm yours.`);
+  document.getElementById('speechDots').style.display = 'none';
+
+  showTyping();
+  await delay(1600);
+  removeTyping();
+
+  const summary = `${state.userName}, I feel like I truly know you now. I know when you wake up, what you love, who matters to you, and why you're here. I'm ${state.personaName}, and I'm so glad you came. Shall we begin?`;
+  addMsg('persona', summary);
+
+  await delay(800);
+  const choiceDiv = document.createElement('div');
+  choiceDiv.className = 'choices';
+  ["Yes, let's get started!", "Can I change anything?", "Tell me more about yourself"].forEach((c,i) => {
+    const btn = document.createElement('button');
+    btn.className = 'choice-btn';
+    btn.innerHTML = `<span class="choice-key">${String.fromCharCode(65+i)}</span>${c}`;
+    btn.onclick = () => {
+      disableChoices();
+      addMsg('user', c);
+      showTyping();
+      setTimeout(() => {
+        removeTyping();
+        addMsg('persona', `Wonderful! I'm ready whenever you are, ${state.userName}. This is just the beginning of something lovely.`);
+      }, 1200);
+    };
+    choiceDiv.appendChild(btn);
+  });
+  const lastBubble = document.querySelector('.msg.persona:last-child .bubble');
+  if (lastBubble) lastBubble.appendChild(choiceDiv);
+
+  document.getElementById('textInput').disabled = false;
+  document.getElementById('sendBtn').disabled = false;
+  document.getElementById('textInput').placeholder = `Chat with ${state.personaName}...`;
+  document.getElementById('personaBadge').textContent = `✦ ${state.personaName} · Ready`;
+  for (let i = 0; i < 20; i++) updateProgress(i, 'done');
+}
+
+// ── Kick off ──────────────────────────────────────────────────────────────
+function startOnboarding() {
+  document.getElementById('welcome').classList.add('fade-out');
+  setTimeout(() => {
+    document.getElementById('welcome').style.display = 'none';
+    document.getElementById('appShell').style.display = 'flex';
+    document.getElementById('appShell').style.position = 'relative';
+    runStep(0);
+  }, 500);
+}
+
+document.getElementById('textInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') handleSend();
+});
+
+function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
+</script>
+</body>
+</html>
